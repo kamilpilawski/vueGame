@@ -1,23 +1,22 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view></router-view>
+    <user-menu></user-menu>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+  import UserMenu from './components/UserMenu.vue'
+  import UserHome from './components/UserHome.vue'
+
+  export default {
+    components: {
+      UserMenu,
+      UserHome
+    },
+    name: 'app'
+  }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="stylus">
+  @import './stylus/main'
 </style>
