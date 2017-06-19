@@ -6,12 +6,10 @@
 
 <script>
   import UserMenu from './components/UserMenu.vue'
-  import UserHome from './components/UserHome.vue'
 
   export default {
     components: {
-      UserMenu,
-      UserHome
+      UserMenu
     },
     name: 'app'
   }
