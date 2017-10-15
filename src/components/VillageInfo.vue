@@ -112,7 +112,7 @@
       ]
     }),
     created: function () {
-      axios.get('/api/villages/info').then(
+      axios.get('/api/village/info').then(
         response => {
           console.log(response)
           this.resources = response.resources
