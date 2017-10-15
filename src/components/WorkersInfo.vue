@@ -108,18 +108,41 @@
       interval: {},
       value: 0
     }),
+    created: function () {
+      axios.get('/api/workers/stats').then(
+        response => {
+          console.log(response)
+          this.assignResult = 'Przydzielono'
+          this.context = 'success'
+          this.snackbar = true
+          this.resources = response.resources
+        }
+      ).catch(
+        error => {
+          console.log(error)
+          this.assignResult = 'Błąd'
+          this.context = 'error'
+          this.snackbar = true
+        }
+      )
+    },
     methods: {
       assignJob () {
         axios.post('/api/workers/assign', this.jobs).then(
-          (response) => console.log(response),
-          this.assignResult = 'Przydzielono',
-          this.context = 'success',
-          this.snackbar = true
+          response => {
+            console.log(response)
+            this.assignResult = 'Przydzielono'
+            this.context = 'success'
+            this.snackbar = true
+            this.jobs = response.jobs
+          }
         ).catch(
-          (error) => console.log(error),
-          this.assignResult = 'Błąd',
-          this.context = 'error',
-          this.snackbar = true
+          error => {
+            console.log(error)
+            this.assignResult = 'Błąd'
+            this.context = 'error'
+            this.snackbar = true
+          }
         )
       }
     },
