@@ -59,12 +59,12 @@
             <v-container fluid grid-list-md>
               <v-layout row wrap v-for="job in jobs" :key="job.id">
 
-                <v-flex xs11>
+                <v-flex xs10>
                   <v-slider :label="job.title" thumb-label step="10" v-bind:max="100"
                             v-model="job.amount"></v-slider>
                 </v-flex>
 
-                <v-flex xs1>
+                <v-flex xs2>
                   <v-text-field v-model="job.amount" type="number"></v-text-field>
                 </v-flex>
 
@@ -102,9 +102,9 @@
       ],
       snackbar: false,
       context: '',
+      assignResult: '',
       mode: '',
       timeout: 6000,
-      assignResult: '',
       interval: {},
       value: 0
     }),
@@ -112,9 +112,6 @@
       axios.get('/api/workers/stats').then(
         response => {
           console.log(response)
-          this.assignResult = 'Przydzielono'
-          this.context = 'success'
-          this.snackbar = true
           this.resources = response.resources
         }
       ).catch(

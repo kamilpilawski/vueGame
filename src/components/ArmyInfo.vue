@@ -20,25 +20,25 @@
             <v-layout row wrap v-for="fight in fights" :key="fight.id">
 
               <v-list two-line subheader>
-              <v-list-tile avatar >
+                <v-list-tile avatar>
 
-                <v-list-tile-avatar>
-                  <v-icon>border_clear</v-icon>
-                </v-list-tile-avatar>
+                  <v-list-tile-avatar>
+                    <v-icon>border_clear</v-icon>
+                  </v-list-tile-avatar>
 
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ fight.enemy }}</v-list-tile-title>
-                  <v-list-tile-sub-title>{{ fight.result }}</v-list-tile-sub-title>
-                </v-list-tile-content>
+                  <v-list-tile-content>
+                    <v-list-tile-title>{{ fight.enemy }}</v-list-tile-title>
+                    <v-list-tile-sub-title>{{ fight.result }}</v-list-tile-sub-title>
+                  </v-list-tile-content>
 
-                <v-list-tile-action>
-                  <v-btn icon>
-                    <v-icon class="grey--text text--lighten-1">info</v-icon>
-                  </v-btn>
-                </v-list-tile-action>
+                  <v-list-tile-action>
+                    <v-btn icon>
+                      <v-icon class="grey--text text--lighten-1">info</v-icon>
+                    </v-btn>
+                  </v-list-tile-action>
 
 
-              </v-list-tile>
+                </v-list-tile>
               </v-list>
               Opis walki
 
@@ -103,9 +103,9 @@
     name: 'userInfo',
     data: () => ({
       fights: [
-        { id: 1, enemy: 'Lachy', result: 'Wygrana', casualties: 200, loot: 255, lost: 0 },
-        { id: 2, enemy: 'Eksy', result: 'Porażka', casualties: 500, loot: 0, lost: 150 },
-        { id: 3, enemy: 'Eksy', result: 'Porażka', casualties: 350, loot: 0, lost: 500 }
+        {id: 1, enemy: 'Lachy', result: 'Wygrana', casualties: 200, loot: 255, lost: 0},
+        {id: 2, enemy: 'Eksy', result: 'Porażka', casualties: 500, loot: 0, lost: 150},
+        {id: 3, enemy: 'Eksy', result: 'Porażka', casualties: 350, loot: 0, lost: 500}
       ],
       villages: [
         {id: 1, title: 'Lachy', army: 15, attack: false},
@@ -118,6 +118,34 @@
       timeout: 6000,
       assignResult: ''
     }),
+    created: function () {
+      axios.get('/api/army/fights').then(
+        response => {
+          console.log(response)
+          this.resources = response.fights
+        }
+      ).catch(
+        error => {
+          console.log(error)
+          this.assignResult = 'Błąd'
+          this.context = 'error'
+          this.snackbar = true
+        }
+      )
+      axios.get('/api/army/villages').then(
+        response => {
+          console.log(response)
+          this.resources = response.villages
+        }
+      ).catch(
+        error => {
+          console.log(error)
+          this.assignResult = 'Błąd'
+          this.context = 'error'
+          this.snackbar = true
+        }
+      )
+    },
     methods: {
       attackVillage () {
         console.log('dzieje sie', this.villages)

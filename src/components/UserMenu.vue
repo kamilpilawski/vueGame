@@ -95,10 +95,10 @@
         drawer: true,
         items: [
           {title: 'Osada', icon: 'home', href: '/home'},
-          {title: 'Armia', icon: 'info', href: '/army'},
-          {title: 'Robotnicy', icon: 'info', href: '/workers'},
-          {title: 'Ustawienia', icon: 'info', href: '/settings'},
-          {title: 'Osady', icon: 'info', href: '/villages'}
+          {title: 'Armia', icon: 'supervisor_account', href: '/army'},
+          {title: 'Robotnicy', icon: 'gavel', href: '/workers'},
+          {title: 'Osady', icon: 'view_module', href: '/villages'},
+          {title: 'Ustawienia', icon: 'settings', href: '/settings'}
         ],
         mini: false,
         right: null
