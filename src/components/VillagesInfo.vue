@@ -1,10 +1,10 @@
 <template>
   <div>
     <h1>
-      To jest home
+      To są sąsiednie osady
     </h1>
     <h3>
-      Działania na osadnikach
+      Działania na innych osadach
     </h3>
   </div>
 </template>
@@ -12,7 +12,7 @@
 
 <script>
   export default {
-    name: 'userHome',
+    name: 'villagesInfo',
     data () {
       return {}
     }

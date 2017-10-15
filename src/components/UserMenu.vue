@@ -21,7 +21,7 @@
 
             <router-link to="/" exact>
               <v-list-tile-avatar>
-                <img src="https://randomuser.me/api/portraits/men/85.jpg"/>
+                <img src="https://randomuser.me/api/portraits/men/86.jpg"/>
               </v-list-tile-avatar>
             </router-link>
 
@@ -84,13 +84,11 @@
 
 <script>
   import UserInfo from './UserInfo.vue'
-  import ArmyInfo from './ArmyInfo.vue'
 
   export default {
     name: 'user-menu',
     components: {
-      UserInfo,
-      ArmyInfo
+      UserInfo
     },
     data () {
       return {
