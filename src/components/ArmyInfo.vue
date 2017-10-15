@@ -80,7 +80,7 @@
                 <v-checkbox v-model="village.attack" label="Atak" dark></v-checkbox>
 
               </v-layout>
-              <v-btn block secondary type="submit">Atakuj</v-btn>
+              <v-btn block color="grey" type="submit">Atakuj</v-btn>
 
             </v-container>
 

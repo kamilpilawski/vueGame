@@ -69,7 +69,7 @@
                 </v-flex>
 
               </v-layout>
-              <v-btn block secondary type="submit">Przydziel</v-btn>
+              <v-btn block color="grey" type="submit">Przydziel</v-btn>
             </v-container>
 
             <v-snackbar :timeout=2000 :success="context === 'success'" :error="context === 'error'" v-model="snackbar">

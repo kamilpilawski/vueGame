@@ -3,14 +3,7 @@
 
         <v-flex xs12 sm6 offset-sm3>
           <v-card img="https://vuetifyjs.com/static/doc-images/cards/girl.jpg" height="300px">
-            <v-card-row actions class="white--text pl-3 pt-3 pb-3"></v-card-row>
 
-            <v-card-row>
-              <v-divider></v-divider>
-              <v-card-row actions>
-                <v-btn flat class="green--text darken-1">View Email</v-btn>
-              </v-card-row>
-            </v-card-row>
 
           </v-card>
         </v-flex>

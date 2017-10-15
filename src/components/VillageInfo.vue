@@ -72,7 +72,7 @@
 
               </v-layout>
 
-              <v-btn block secondary type="submit">Kupuje, cena:{{ calckPrice() }}</v-btn>
+              <v-btn block color="grey" type="submit">Kupuje, cena:{{ calckPrice() }}</v-btn>
             </v-container>
 
             <v-snackbar :timeout=2000 :success="context === 'success'" :error="context === 'error'" v-model="snackbar">

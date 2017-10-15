@@ -5,7 +5,7 @@
 
       <v-list class="pa-0">
 
-        <v-list-item v-if="mini">
+        <v-list-tile v-if="mini">
 
           <v-list-tile @click.native.stop="mini = !mini">
             <v-list-tile-action>
@@ -13,9 +13,9 @@
             </v-list-tile-action>
           </v-list-tile>
 
-        </v-list-item>
+        </v-list-tile>
 
-        <v-list-item>
+        <v-list-tile>
 
           <v-list-tile avatar tag="div">
 
@@ -37,15 +37,15 @@
 
           </v-list-tile>
 
-        </v-list-item>
+        </v-list-tile>
       </v-list>
 
       <v-list class="pt-0" dense>
 
         <v-divider light></v-divider>
 
-        <v-list-item v-for="item in items" :key="item">
-          <v-list-tile :router="true" :to="item.href" v-tooltip:top="{html: item.title}">
+        <v-list-tile v-for="item in items" :key="item">
+          <v-list-tile :router="true" :to="item.href">
 
             <v-list-tile-action>
               <v-icon light>{{ item.icon }}</v-icon>
@@ -57,13 +57,13 @@
 
           </v-list-tile>
 
-        </v-list-item>
+        </v-list-tile>
 
       </v-list>
 
     </v-navigation-drawer>
 
-    <v-toolbar fixed light>
+    <v-toolbar dark floating>
       <v-toolbar-side-icon light @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>{{ $store.state.title }}</v-toolbar-title>
     </v-toolbar>
