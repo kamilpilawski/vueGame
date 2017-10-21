@@ -92,12 +92,10 @@
     data: () => ({
       jobs: [
         {id: 1, title: 'Lasy', amount: 0},
-        {id: 2, title: 'Pola', amount: 0},
         {id: 3, title: 'Kopalnie', amount: 0}
       ],
       resources: [
         {id: 1, title: 'Drewno', income: 12},
-        {id: 2, title: 'Zboże', income: 2},
         {id: 3, title: 'Minerały', income: 33}
       ],
       snackbar: false,

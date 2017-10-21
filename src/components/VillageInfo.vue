@@ -62,7 +62,7 @@
               <v-layout row wrap v-for="cargo in cargos" :key="cargo.id">
 
                 <v-flex xs10>
-                  <v-slider :label="cargo.name" thumb-label step="10" v-bind:max="1000"
+                  <v-slider :label="cargo.name" thumb-label step="10" v-bind:max="1000" v-bind:min="-1000"
                             v-model="cargo.amount"></v-slider>
                 </v-flex>
 
@@ -72,7 +72,7 @@
 
               </v-layout>
 
-              <v-btn block color="grey" type="submit">Kupuje, cena:{{ calckPrice() }}</v-btn>
+              <v-btn block color="grey" type="submit">{{ calckPrice() }}</v-btn>
             </v-container>
 
             <v-snackbar :timeout=2000 :success="context === 'success'" :error="context === 'error'" v-model="snackbar">
@@ -105,34 +105,58 @@
 
       ],
       cargos: [
-        {id: 1, name: 'Drewno', amount: 200, price: 1},
-        {id: 2, name: 'Kruszce', amount: 350, price: 2},
-        {id: 2, name: 'Robotnicy', amount: 350, price: 3},
-        {id: 2, name: 'Armia', amount: 350, price: 4}
-      ]
+        {id: 1, name: 'Drewno', amount: 0, price: 1},
+        {id: 2, name: 'Kruszce', amount: 0, price: 2},
+        {id: 2, name: 'Robotnicy', amount: 0, price: 3},
+        {id: 2, name: 'Armia', amount: 0, price: 4}
+      ],
+      getIn: function () {
+        axios.get('/api/village/info').then(
+          response => {
+            console.log(response)
+            this.resources = response.resources
+          }
+        ).catch(
+          error => {
+            console.log(error)
+            this.assignResult = 'Błąd'
+            this.context = 'error'
+            this.snackbar = true
+          }
+        )
+        axios.get('/api/market/info').then(
+          response => {
+            console.log(response)
+            this.resources = response.resources
+          }
+        ).catch(
+          error => {
+            console.log(error)
+            this.assignResult = 'Błąd'
+            this.context = 'error'
+            this.snackbar = true
+          }
+        )
+      }
     }),
     created: function () {
-      axios.get('/api/village/info').then(
-        response => {
-          console.log(response)
-          this.resources = response.resources
-        }
-      ).catch(
-        error => {
-          console.log(error)
-          this.assignResult = 'Błąd'
-          this.context = 'error'
-          this.snackbar = true
-        }
-      )
+      this.getIn()
     },
     methods: {
       calckPrice () {
-        return this.cargos.map(function (cargo) {
+        var price = this.cargos.map(function (cargo) {
           return cargo.price * cargo.amount
         }).reduce(function (price, nextPrice, index, arr) {
           return price + nextPrice
         })
+
+        if (price === 0) {
+          return 'Transakcja bezkosztowa'
+        } else if (price > 0) {
+          return 'Kupuję, cena: ' + price
+        } else {
+          return 'Sprzedaję za: ' + (price * (-1))
+        }
       },
       buy () {
         axios.post('/api/market/buy', this.cargos).then(
@@ -152,6 +176,7 @@
             this.snackbar = true
           }
         )
+        this.getIn()
       }
     }
   }

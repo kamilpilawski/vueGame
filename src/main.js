@@ -9,6 +9,7 @@ import store from './store/store'
 Vue.use(Vuetify)
 
 Vue.config.productionTip = false
+Vue.prototype.serverIp = 'http://localhost:80/VelcrowServer'
 
 /* eslint-disable no-new */
 new Vue({

@@ -40,7 +40,7 @@
 
                 </v-list-tile>
               </v-list>
-              Opis walki
+              {{ fight.description }}
 
             </v-layout>
 
@@ -103,9 +103,33 @@
     name: 'userInfo',
     data: () => ({
       fights: [
-        {id: 1, enemy: 'Lachy', result: 'Wygrana', casualties: 200, loot: 255, lost: 0},
-        {id: 2, enemy: 'Eksy', result: 'Porażka', casualties: 500, loot: 0, lost: 150},
-        {id: 3, enemy: 'Eksy', result: 'Porażka', casualties: 350, loot: 0, lost: 500}
+        {
+          id: 1,
+          enemy: 'Lachy',
+          result: 'Wygrana',
+          casualties: 200,
+          loot: 255,
+          lost: 0,
+          description: 'Straciłeś 200 żołnierzy i 0 złota. Zyskałeś 255 złota.'
+        },
+        {
+          id: 2,
+          enemy: 'Eksy',
+          result: 'Porażka',
+          casualties: 500,
+          loot: 0,
+          lost: 150,
+          description: 'Straciłeś 500 żołnierzy i 150 złota. Zyskałeś 0 złota.'
+        },
+        {
+          id: 3,
+          enemy: 'Eksy',
+          result: 'Porażka',
+          casualties: 350,
+          loot: 0,
+          lost: 500,
+          description: 'Straciłeś 350 żołnierzy i 500 złota. Zyskałeś 0 złota.'
+        }
       ],
       villages: [
         {id: 1, title: 'Lachy', army: 15, attack: false},
@@ -116,39 +140,41 @@
       context: '',
       mode: '',
       timeout: 6000,
-      assignResult: ''
+      assignResult: '',
+      getInfo: function () {
+        axios.get(this.serverIp + '/api/army/fights').then(
+          response => {
+            console.log(response)
+            this.resources = response.fights
+          }
+        ).catch(
+          error => {
+            console.log(error)
+            this.assignResult = 'Błąd'
+            this.context = 'error'
+            this.snackbar = true
+          }
+        )
+        axios.get('/api/army/villages').then(
+          response => {
+            console.log(response)
+            this.resources = response.villages
+          }
+        ).catch(
+          error => {
+            console.log(error)
+            this.assignResult = 'Błąd'
+            this.context = 'error'
+            this.snackbar = true
+          }
+        )
+      }
     }),
     created: function () {
-      axios.get('/api/army/fights').then(
-        response => {
-          console.log(response)
-          this.resources = response.fights
-        }
-      ).catch(
-        error => {
-          console.log(error)
-          this.assignResult = 'Błąd'
-          this.context = 'error'
-          this.snackbar = true
-        }
-      )
-      axios.get('/api/army/villages').then(
-        response => {
-          console.log(response)
-          this.resources = response.villages
-        }
-      ).catch(
-        error => {
-          console.log(error)
-          this.assignResult = 'Błąd'
-          this.context = 'error'
-          this.snackbar = true
-        }
-      )
+      this.getInfo()
     },
     methods: {
       attackVillage () {
-        console.log('dzieje sie', this.villages)
         axios.post('/api/village/attack', this.villages).then(
           (response) => console.log(response),
           this.assignResult = 'Przydzielono',
@@ -160,6 +186,7 @@
           this.context = 'error',
           this.snackbar = true
         )
+        this.getInfo()
       }
     }
   }
