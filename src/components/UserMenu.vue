@@ -98,7 +98,9 @@
           {title: 'Armia', icon: 'supervisor_account', href: '/army'},
           {title: 'Robotnicy', icon: 'gavel', href: '/workers'},
           {title: 'Osady', icon: 'view_module', href: '/villages'},
-          {title: 'Ustawienia', icon: 'settings', href: '/settings'}
+          {title: 'Ustawienia', icon: 'settings', href: '/settings'},
+          {title: 'Logowanie', icon: 'account_box', href: '/signin'},
+          {title: 'Nowy użytkownik', icon: 'android', href: '/signup'}
         ],
         mini: false,
         right: null

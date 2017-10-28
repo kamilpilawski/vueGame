@@ -142,17 +142,22 @@
       timeout: 6000,
       assignResult: '',
       getInfo: function () {
-        axios.get(this.serverIp + '/api/army/fights').then(
+        const token = this.$store.token
+        axios.get(this.serverIp + '/api/army/fights?token=' + token).then(
           response => {
             console.log(response)
             this.resources = response.fights
           }
         ).catch(
           error => {
-            console.log(error)
+            console.log('to to : ' + error.response.status)
             this.assignResult = 'Błąd'
             this.context = 'error'
             this.snackbar = true
+//            if (error.response.status >= 400) {
+//              console.log('nieuatoryzowany ')
+//              this.$router.push('/signin')
+//            }
           }
         )
         axios.get('/api/army/villages').then(
@@ -175,7 +180,7 @@
     },
     methods: {
       attackVillage () {
-        axios.post('/api/village/attack', this.villages).then(
+        axios.post(this.serverIp + '/api/village/attack', this.villages, {headers: {'X-Requested-With': 'XMLHttpRequest'}}).then(
           (response) => console.log(response),
           this.assignResult = 'Przydzielono',
           this.context = 'success',

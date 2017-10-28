@@ -7,6 +7,8 @@ import WorkersInfo from '../components/WorkersInfo.vue'
 import ArmyInfo from '../components/ArmyInfo.vue'
 import SettingsInfo from '../components/SettingsInfo.vue'
 import VillagesInfo from '../components/VillagesInfo.vue'
+import Signin from '../components/Signin.vue'
+import Signup from '../components/Signup.vue'
 
 Vue.use(Router)
 
@@ -18,6 +20,8 @@ export default new Router({
     {path: '/army', component: ArmyInfo},
     {path: '/workers', component: WorkersInfo},
     {path: '/settings', component: SettingsInfo},
-    {path: '/villages', component: VillagesInfo}
+    {path: '/villages', component: VillagesInfo},
+    {path: '/signin', component: Signin},
+    {path: '/signup', component: Signup}
   ]
 })
