@@ -9,6 +9,7 @@ import SettingsInfo from '../components/SettingsInfo.vue'
 import VillagesInfo from '../components/VillagesInfo.vue'
 import Signin from '../components/Signin.vue'
 import Signup from '../components/Signup.vue'
+import Signout from '../components/Signout.vue'
 
 Vue.use(Router)
 
@@ -22,6 +23,7 @@ export default new Router({
     {path: '/settings', component: SettingsInfo},
     {path: '/villages', component: VillagesInfo},
     {path: '/signin', component: Signin},
-    {path: '/signup', component: Signup}
+    {path: '/signup', component: Signup},
+    {path: '/signout', component: Signout}
   ]
 })

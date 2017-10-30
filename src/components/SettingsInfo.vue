@@ -86,7 +86,8 @@
       }
     }),
     created: function () {
-      axios.get('/api/settings/info').then(
+      const token = this.$store.token
+      axios.get(this.serverIp + '/api/settings/info?token=' + token).then(
         response => {
           console.log(response)
           this.settings = response.settings
@@ -102,10 +103,11 @@
     },
     methods: {
       submitVillage () {
+        const token = this.$store.token
         console.log('submit village')
         if (this.$refs.nameForm.validate()) {
           console.log('submit village2')
-          axios.post('/api/settings/village/name', {
+          axios.post(this.serverIp + '/api/settings/village/name?token=' + token, {
             name: this.name,
             select: this.select,
             checkbox: this.checkbox
@@ -113,9 +115,10 @@
         }
       },
       submitPassword () {
+        const token = this.$store.token
         console.log('submit password')
         if (this.$refs.passwordForm.validate()) {
-          axios.post('/api/settings/village/password', {
+          axios.post(this.serverIp + '/api/settings/village/password?token=' + token, {
             password: this.password,
             select: this.select,
             checkbox: this.checkbox

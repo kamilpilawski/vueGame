@@ -12,54 +12,54 @@
 
 
       <v-card row wrap v-for="village in villages" :key="village.id">
-          <v-card-title primary-title>
-            <span class="grey--text">{{ village.name }}</span>
-          </v-card-title>
-          <v-card-text>
-            <v-container fluid grid-list-md>
+        <v-card-title primary-title>
+          <span class="grey--text">{{ village.name }}</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container fluid grid-list-md>
 
-              <v-list two-line>
-                <v-list-tile>
+            <v-list two-line>
+              <v-list-tile>
 
-                  <v-list-tile-avatar>
-                    <v-icon>account_balance</v-icon>
-                  </v-list-tile-avatar>
+                <v-list-tile-avatar>
+                  <v-icon>account_balance</v-icon>
+                </v-list-tile-avatar>
 
-                  <v-list-tile-content>
-                    <v-list-tile-title>Zasoby:</v-list-tile-title>
-                    <v-list-tile-sub-title>{{ village.goods }}</v-list-tile-sub-title>
-                  </v-list-tile-content>
+                <v-list-tile-content>
+                  <v-list-tile-title>Zasoby:</v-list-tile-title>
+                  <v-list-tile-sub-title>{{ village.goods }}</v-list-tile-sub-title>
+                </v-list-tile-content>
 
-                </v-list-tile>
+              </v-list-tile>
 
-                <v-list-tile>
-                  <v-list-tile-avatar>
-                    <v-icon>supervisor_account</v-icon>
-                  </v-list-tile-avatar>
+              <v-list-tile>
+                <v-list-tile-avatar>
+                  <v-icon>supervisor_account</v-icon>
+                </v-list-tile-avatar>
 
-                  <v-list-tile-content>
-                    <v-list-tile-title>Armia:</v-list-tile-title>
-                    <v-list-tile-sub-title> {{ village.army }}</v-list-tile-sub-title>
-                  </v-list-tile-content>
+                <v-list-tile-content>
+                  <v-list-tile-title>Armia:</v-list-tile-title>
+                  <v-list-tile-sub-title> {{ village.army }}</v-list-tile-sub-title>
+                </v-list-tile-content>
 
-                </v-list-tile>
+              </v-list-tile>
 
-                <v-list-tile>
-                  <v-list-tile-avatar>
-                    <v-icon>gavel</v-icon>
-                  </v-list-tile-avatar>
+              <v-list-tile>
+                <v-list-tile-avatar>
+                  <v-icon>gavel</v-icon>
+                </v-list-tile-avatar>
 
-                  <v-list-tile-content>
-                    <v-list-tile-title>Robotników:</v-list-tile-title>
-                    <v-list-tile-sub-title> {{ village.workers }}</v-list-tile-sub-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-              </v-list>
+                <v-list-tile-content>
+                  <v-list-tile-title>Robotników:</v-list-tile-title>
+                  <v-list-tile-sub-title> {{ village.workers }}</v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </v-list>
 
 
-            </v-container>
-          </v-card-text>
-        </v-card>
+          </v-container>
+        </v-card-text>
+      </v-card>
 
 
     </v-flex>
@@ -92,7 +92,8 @@
       ]
     }),
     created: function () {
-      axios.get('/api/villages/info').then(
+      const token = this.$store.token
+      axios.get(this.serverIp + '/api/villages/info?token=' + token).then(
         response => {
           console.log(response)
           this.villages = response.villages

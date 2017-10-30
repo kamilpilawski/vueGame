@@ -160,7 +160,7 @@
 //            }
           }
         )
-        axios.get('/api/army/villages').then(
+        axios.get(this.serverIp + '/api/army/villages?token=' + token).then(
           response => {
             console.log(response)
             this.resources = response.villages
@@ -180,7 +180,9 @@
     },
     methods: {
       attackVillage () {
-        axios.post(this.serverIp + '/api/village/attack', this.villages, {headers: {'X-Requested-With': 'XMLHttpRequest'}}).then(
+        console.log('teges: ' + axios.defaults.headers.common)
+        const token = this.$store.token
+        axios.post(this.serverIp + '/api/village/attack?token=' + token, this.villages).then(
           (response) => console.log(response),
           this.assignResult = 'Przydzielono',
           this.context = 'success',

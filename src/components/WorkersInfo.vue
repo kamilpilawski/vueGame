@@ -107,7 +107,8 @@
       value: 0
     }),
     created: function () {
-      axios.get('/api/workers/stats').then(
+      const token = this.$store.token
+      axios.get(this.serverIp + '/api/workers/stats?token=' + token).then(
         response => {
           console.log(response)
           this.resources = response.resources
@@ -123,7 +124,8 @@
     },
     methods: {
       assignJob () {
-        axios.post('/api/workers/assign', this.jobs).then(
+        const token = this.$store.token
+        axios.post(this.serverIp + '/api/workers/assign?token=' + token, this.jobs).then(
           response => {
             console.log(response)
             this.assignResult = 'Przydzielono'

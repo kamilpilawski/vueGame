@@ -6,6 +6,7 @@ import Cookie from 'js-cookie'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  token: '',
   plugins: [
     createPersistedState({
       paths: ['userName', 'authority'],

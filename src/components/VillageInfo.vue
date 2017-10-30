@@ -111,7 +111,8 @@
         {id: 2, name: 'Armia', amount: 0, price: 4}
       ],
       getIn: function () {
-        axios.get('/api/village/info').then(
+        const token = this.$store.token
+        axios.get(this.serverIp + '/api/village/info?token=' + token).then(
           response => {
             console.log(response)
             this.resources = response.resources
@@ -124,7 +125,7 @@
             this.snackbar = true
           }
         )
-        axios.get('/api/market/info').then(
+        axios.get(this.serverIp + '/api/market/info?token=' + token).then(
           response => {
             console.log(response)
             this.resources = response.resources
@@ -159,7 +160,8 @@
         }
       },
       buy () {
-        axios.post('/api/market/buy', this.cargos).then(
+        const token = this.$store.token
+        axios.post(this.serverIp + '/api/market/buy?token=' + token, this.cargos).then(
           response => {
             console.log(response)
             this.assignResult = 'Dokonano zakupu'

@@ -38,6 +38,7 @@
 
 <script>
   import axios from 'axios'
+  import router from '../router'
 
   export default {
     data: () => ({
@@ -47,22 +48,20 @@
     }),
     methods: {
       signin () {
-        axios.post(this.serverIp + 'api/user/signin',
+        console.log('staram sie zalogowac: ' + this.email + ' ' + this.password)
+        axios.post(this.serverIp + '/api/user/signin',
           {
             email: this.email,
             password: this.password
-          },
-          {headers: {'X-Requested-With': 'XMLHttpRequest'}}
-        ).then(
+          }).then(
           response => {
             console.log(response)
-            console.log('to jest token ' + response.data.token)
             const token = response.data.token
             const base64Url = token.split('.')[1]
             const base64 = base64Url.replace('-', '+').replace('_', '/')
             console.log(JSON.parse(window.atob(base64)))
             this.$store.token = token
-            console.log('token ze stora: ' + this.$store.token)
+            router.push('/')
           }
         ).catch(
           error => {

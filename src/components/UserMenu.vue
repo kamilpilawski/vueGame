@@ -44,7 +44,7 @@
 
         <v-divider light></v-divider>
 
-        <v-list-tile v-for="item in items" :key="item">
+        <v-list-tile v-for="item in items" :key="item.id" v-show="item.visible" @click.native.stop="">
           <v-list-tile :router="true" :to="item.href">
 
             <v-list-tile-action>
@@ -90,22 +90,21 @@
     components: {
       UserInfo
     },
-    data () {
-      return {
-        drawer: true,
-        items: [
-          {title: 'Osada', icon: 'home', href: '/home'},
-          {title: 'Armia', icon: 'supervisor_account', href: '/army'},
-          {title: 'Robotnicy', icon: 'gavel', href: '/workers'},
-          {title: 'Osady', icon: 'view_module', href: '/villages'},
-          {title: 'Ustawienia', icon: 'settings', href: '/settings'},
-          {title: 'Logowanie', icon: 'account_box', href: '/signin'},
-          {title: 'Nowy użytkownik', icon: 'android', href: '/signup'}
-        ],
-        mini: false,
-        right: null
-      }
-    },
+    data: () => ({
+      drawer: true,
+      mini: false,
+      right: null,
+      items: [
+        {id: 1, title: 'Osada', icon: 'home', href: '/home', visible: true},
+        {id: 2, title: 'Armia', icon: 'supervisor_account', href: '/army', visible: true},
+        {id: 3, title: 'Robotnicy', icon: 'gavel', href: '/workers', visible: true},
+        {id: 4, title: 'Osady', icon: 'view_module', href: '/villages', visible: true},
+        {id: 5, title: 'Ustawienia', icon: 'settings', href: '/settings', visible: true},
+        {id: 6, title: 'Nowy użytkownik', icon: 'pregnant_woman', href: '/signup', visible: true},
+        {id: 7, title: 'Logowanie', icon: 'flight_land', href: '/signin', visible: true},
+        {id: 8, title: 'Wylogowanie', icon: 'power_settings_new', href: '/signout', visible: true}
+      ]
+    }),
     methods: {
       changeNavigationState () {
         this.$store.commit('changeNavigationState')
