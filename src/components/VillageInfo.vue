@@ -59,15 +59,15 @@
           </v-card-title>
           <v-card-text>
             <v-container fluid grid-list-md>
-              <v-layout row wrap v-for="cargo in cargos" :key="cargo.id">
+              <v-layout row wrap v-for="mrkt in resources" :key="mrkt.id">
 
                 <v-flex xs10>
-                  <v-slider :label="cargo.name" thumb-label step="10" v-bind:max="1000" v-bind:min="-1000"
-                            v-model="cargo.amount"></v-slider>
+                  <v-slider :label="mrkt.name" thumb-label step="10" v-bind:max="1000" v-bind:min="-1000"
+                            v-model="mrkt.amount"></v-slider>
                 </v-flex>
 
                 <v-flex xs2>
-                  <v-text-field v-model="cargo.amount" type="number"></v-text-field>
+                  <v-text-field v-model="mrkt.amount" type="number"></v-text-field>
                 </v-flex>
 
               </v-layout>
@@ -99,12 +99,8 @@
       snackbar: false,
       context: '',
       assignResult: '',
-      resources: [
-        {id: 1, name: 'Drewno', amount: 200},
-        {id: 2, name: 'Kruszce', amount: 350}
-
-      ],
-      cargos: [
+      resources: [],
+      market: [
         {id: 1, name: 'Drewno', amount: 0, price: 1},
         {id: 2, name: 'Kruszce', amount: 0, price: 2},
         {id: 2, name: 'Robotnicy', amount: 0, price: 3},
@@ -115,7 +111,7 @@
         axios.get(this.serverIp + '/api/village/info?token=' + token).then(
           response => {
             console.log(response)
-            this.resources = response.resources
+            this.resources = response.data.data
           }
         ).catch(
           error => {
@@ -128,7 +124,7 @@
         axios.get(this.serverIp + '/api/market/info?token=' + token).then(
           response => {
             console.log(response)
-            this.resources = response.resources
+            this.market = response.data.data
           }
         ).catch(
           error => {
@@ -145,7 +141,7 @@
     },
     methods: {
       calckPrice () {
-        var price = this.cargos.map(function (cargo) {
+        var price = this.market.map(function (cargo) {
           return cargo.price * cargo.amount
         }).reduce(function (price, nextPrice, index, arr) {
           return price + nextPrice
@@ -161,13 +157,13 @@
       },
       buy () {
         const token = this.$store.token
-        axios.post(this.serverIp + '/api/market/buy?token=' + token, this.cargos).then(
+        axios.post(this.serverIp + '/api/market/buy?token=' + token, this.market).then(
           response => {
             console.log(response)
             this.assignResult = 'Dokonano zakupu'
             this.context = 'success'
             this.snackbar = true
-            this.cargos = response.cargos
+            this.market = response.market
             this.resources = response.resources
           }
         ).catch(
